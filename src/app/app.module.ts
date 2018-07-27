@@ -14,7 +14,7 @@ import { VaEventItemComponent } from './va-event-list/va-event-item/va-event-ite
     VaEventItemComponent
   ],
   imports: [
-    BrowserModule,FormsModule, NgxPaginationModule,HttpClientModule
+    BrowserModule, FormsModule, NgxPaginationModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
