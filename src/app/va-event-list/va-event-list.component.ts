@@ -12,45 +12,45 @@ import 'rxjs/add/operator/map';
 })
 export class VaEventListComponent implements OnInit {
 
-  events:eventItem[] = new Array();
+  events: eventItem[] = new Array();
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
 
   }
 
    ngOnInit() {
 
-    this.getIMISEvents().subscribe(data=>this.events=data);
+    this.getIMISEvents().subscribe(data => this.events = data);
 
    }
 
 
   getIMISEvents (): Observable<eventItem[]> {
 
-    let baseURL = 'https://wsma.org/' ;
+    const baseURL = 'https://wsma.org/' ;
    // let url = baseURL + '/api/event?StartDateTime=gt:'+new Date().toLocaleDateString();
-    let url = baseURL + '/api/event?Status=A';
-    let authToken = (document.getElementById('__RequestVerificationToken') as HTMLInputElement).value;
-   
-  
+    const url = baseURL + '/api/event?Status=A';
+    const authToken = (document.getElementById('__RequestVerificationToken') as HTMLInputElement).value;
+
+
      return this.http.get(url, {headers: { 'RequestVerificationToken': authToken }})
-      .map((res:any)=> {
-        let results = res.Items.$values.map ( item => {
+      .map((res: any) => {
+        const results = res.Items.$values.map ( item => {
             return new eventItem(
                 item.Name,
-                item.Description, 
+                item.Description,
                 item.EventId,
                 item.StartDateTime,
-                item.ImageUrl.replace('~',''),
+                item.ImageUrl.replace('~', ''),
                 item.Location.Name
-                )
+                );
         });
         return results;
     });
 
   }
 
-   
-  
+
+
 
 }
